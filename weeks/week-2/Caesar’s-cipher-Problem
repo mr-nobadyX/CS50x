@@ -1,0 +1,54 @@
+What the question is asking:
+
+You need to encrypt a message using Caesar’s cipher.
+
+Encryption rule: Shift each letter of the plaintext forward by key positions in the alphabet.
+
+Key: A positive integer provided by the user as a command-line argument when running the program.
+
+Wrap around: If you go past Z, wrap back to A; if you go past z, wrap back to a.
+
+Case sensitivity: Preserve uppercase/lowercase.
+
+Non-letters: Leave them unchanged (spaces, punctuation, numbers).
+
+Input:
+
+Key (from command line)
+
+Plaintext (prompted at runtime)
+
+Output: Ciphertext (the encrypted version)
+
+
+Sol^n 
+Mental checklist (how to think about it)
+Input validation
+
+Program must be run with exactly one command-line argument: the key.
+
+The key must consist only of digits (so it’s a non-negative integer). If not, print Usage: ./caesar key and exit.
+
+Normalize the key
+
+Convert the key string to an integer and reduce it with k = k % 26 (keeps shifts small and equivalent).
+
+Get plaintext
+
+Prompt the user: get_string("plaintext: ").
+
+Process each character
+
+If isupper(c): shifted = 'A' + (c - 'A' + k) % 26
+
+Else if islower(c): shifted = 'a' + (c - 'a' + k) % 26
+
+Else: leave character unchanged (numbers, punctuation, spaces).
+
+Output
+
+Print ciphertext: <result>\n.
+
+Test
+
+Try key = 0, key = 1, key = 26, key = 27, key = 13 (ROT13), punctuation-only strings, empty string.
