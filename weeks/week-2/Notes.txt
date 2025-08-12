@@ -1,0 +1,448 @@
+# CS50 Week 3 - Arrays & Programming Fundamentals
+## Complete Master Study Guide
+
+---
+
+## 🎯 **Learning Objectives**
+By the end of this week, you should master:
+- The complete compilation process from source to executable
+- Array manipulation and memory concepts
+- String handling in C
+- Command-line argument processing
+- Debugging strategies and tools
+- Basic cryptographic principles
+
+---
+
+## 📚 **1. Compilation Deep Dive**
+
+### **Understanding Make vs Compilers**
+- **`make`** = Automation tool (like a smart assistant)
+- **`clang`** = Actual compiler (does the heavy lifting)
+
+```bash
+# What you type:
+make hello
+
+# What actually happens:
+clang -o hello hello.c -lcs50
+```
+
+### **The Four-Stage Compilation Process**
+
+#### Stage 1: **Preprocessing**
+- Copies header file contents (`#include <stdio.h>`)
+- Processes macros and `#define` statements
+- Removes comments
+- **Output**: Expanded source code
+
+#### Stage 2: **Compiling** 
+- Converts C code → Assembly language
+- Assembly = Human-readable CPU instructions
+- **Output**: `.s` file (assembly code)
+
+#### Stage 3: **Assembling**
+- Assembly language → Machine code (binary)
+- Creates object files
+- **Output**: `.o` file (object code)
+
+#### Stage 4: **Linking**
+- Combines your code + library functions
+- Resolves external references
+- **Output**: Executable program
+
+### **Compilation Flags Explained**
+```bash
+clang -o program source.c -lcs50 -lm
+#      ↑        ↑         ↑     ↑
+#   output   source    CS50   math
+#   name     file      lib    lib
+```
+
+### **Decompilation Reality Check**
+- **Possible**: Machine code → Assembly
+- **Difficult**: Assembly → Readable C
+- **Impossible**: Exact original source recovery
+- **Why**: Comments, variable names, and structure are lost
+
+---
+
+## 🐛 **2. Debugging Arsenal**
+
+### **Three-Tier Debugging Strategy**
+
+#### **Tier 1: Printf Debugging**
+```c
+printf("DEBUG: variable x = %d\n", x);
+printf("DEBUG: Reached line 42\n");
+```
+**When to use**: Quick value checks, flow verification
+
+#### **Tier 2: VS Code Debugger**
+- Set breakpoints by clicking line numbers
+- Step through code line-by-line
+- Watch variable values in real-time
+- **When to use**: Complex logic issues
+
+#### **Tier 3: debug50**
+```bash
+debug50 ./program
+```
+**When to use**: CS50-specific debugging with integrated tools
+
+### **Debugging Mindset**
+1. **Reproduce** the bug consistently
+2. **Isolate** the problematic section
+3. **Hypothesize** what's wrong
+4. **Test** your hypothesis
+5. **Fix** and verify
+
+---
+
+## 📊 **3. Data Types Mastery**
+
+### **Memory Layout & Sizes**
+| Type     | Bytes | Bits | Range/Notes                    |
+|----------|-------|------|--------------------------------|
+| `bool`   | 1     | 8    | `true` (1) or `false` (0)     |
+| `char`   | 1     | 8    | -128 to 127 OR 0 to 255      |
+| `int`    | 4     | 32   | ±2.1 billion (approx)         |
+| `long`   | 8     | 64   | ±9.2 × 10¹⁸ (approx)          |
+| `float`  | 4     | 32   | 6-7 decimal precision         |
+| `double` | 8     | 64   | 15-17 decimal precision       |
+
+### **Choosing the Right Type**
+- **`int`**: Default for whole numbers
+- **`long`**: When `int` might overflow
+- **`float`**: Rarely used (prefer `double`)
+- **`double`**: Standard for decimal numbers
+- **`char`**: Single characters, small integers
+
+---
+
+## 🔢 **4. Arrays: The Foundation**
+
+### **Core Concepts**
+- **Definition**: Collection of same-type variables in contiguous memory
+- **Size**: Fixed at declaration time
+- **Indexing**: Zero-based (first element = index 0)
+
+### **Array Declaration Patterns**
+```c
+// Method 1: Declare then assign
+int scores[3];
+scores[0] = 72;
+scores[1] = 73;
+scores[2] = 33;
+
+// Method 2: Initialize with values
+int scores[3] = {72, 73, 33};
+
+// Method 3: Let compiler count
+int scores[] = {72, 73, 33};  // Size = 3
+```
+
+### **Memory Visualization**
+```
+scores[0]  scores[1]  scores[2]
+   72         73         33
+[------][------][------]
+Memory addresses increase →
+```
+
+### **Array Boundaries**
+⚠️ **Critical**: C doesn't check array bounds!
+```c
+int arr[3] = {1, 2, 3};
+arr[5] = 100;  // ❌ Undefined behavior!
+```
+
+---
+
+## 🔤 **5. Strings: Arrays in Disguise**
+
+### **String Fundamentals**
+- **Reality**: Strings are `char` arrays
+- **Special**: End with null terminator `'\0'`
+- **CS50**: `string` type = `char*` (pointer to char)
+
+### **String Memory Layout**
+```c
+string name = "Sun";
+```
+**Memory representation**:
+```
+Index:  0   1   2   3
+Value: 'S' 'u' 'n' '\0'
+```
+
+### **String vs Character Array**
+```c
+// These are equivalent:
+string word = "Hello";
+char word[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+```
+
+### **Essential String Functions**
+```c
+#include <string.h>
+#include <ctype.h>
+
+int len = strlen(str);        // Get length
+char c = toupper('a');        // Convert to uppercase
+char c = tolower('A');        // Convert to lowercase
+bool is_letter = isalpha(c);  // Check if alphabetic
+bool is_number = isdigit(c);  // Check if digit
+```
+
+---
+
+## 🔢 **6. ASCII: The Character Code**
+
+### **ASCII Essentials**
+- **Range**: 0-127 (7 bits)
+- **Uppercase**: A=65, B=66, ..., Z=90
+- **Lowercase**: a=97, b=98, ..., z=122
+- **Digits**: 0=48, 1=49, ..., 9=57
+
+### **Key ASCII Relationships**
+- Uppercase ↔ Lowercase: Difference of 32
+- Convert case: `c ± 32` or use `ctype.h` functions
+
+### **Character Arithmetic**
+```c
+char next_letter = 'A' + 1;  // Result: 'B'
+int ascii_value = 'A';       // Result: 65
+
+// Case conversion (manual)
+char upper = 'a' - 32;       // Result: 'A'
+char lower = 'A' + 32;       // Result: 'a'
+
+// Case conversion (library)
+char upper = toupper('a');   // Result: 'A'
+char lower = tolower('A');   // Result: 'a'
+```
+
+---
+
+## ⌨️ **7. Command-Line Arguments**
+
+### **Function Signature**
+```c
+int main(int argc, string argv[])
+```
+
+### **Parameter Breakdown**
+- **`argc`**: **Arg**ument **C**ount (includes program name)
+- **`argv`**: **Arg**ument **V**alues (array of strings)
+
+### **Example Walkthrough**
+```bash
+./greet Hello World
+```
+
+**Result**:
+- `argc = 3`
+- `argv[0] = "./greet"`    (program name)
+- `argv[1] = "Hello"`      (first argument)
+- `argv[2] = "World"`      (second argument)
+
+### **Practical Usage**
+```c
+#include <stdio.h>
+
+int main(int argc, string argv[])
+{
+    if (argc != 2)
+    {
+        printf("Usage: ./program <name>\n");
+        return 1;  // Error exit
+    }
+    
+    printf("Hello, %s!\n", argv[1]);
+    return 0;  // Success exit
+}
+```
+
+---
+
+## 🚪 **8. Exit Codes: Program Communication**
+
+### **Standard Exit Codes**
+- **`0`**: Success (everything worked)
+- **`1`**: General error
+- **`2`**: Misuse of shell command
+- **Custom**: Any non-zero value
+
+### **Implementation**
+```c
+int main(void)
+{
+    // Success scenario
+    return 0;
+    
+    // Error scenarios
+    if (error_condition)
+        return 1;
+}
+```
+
+### **Checking Exit Codes**
+```bash
+./program
+echo $?  # Shows exit code of last command
+```
+
+---
+
+## 🔐 **9. Encryption Fundamentals**
+
+### **Core Terminology**
+- **Plaintext**: Original, readable message
+- **Ciphertext**: Encrypted, unreadable message  
+- **Key**: Secret information for encryption/decryption
+- **Algorithm**: Method of transformation
+
+### **Caesar Cipher Deep Dive**
+**Concept**: Shift each letter by fixed amount
+
+**Encryption Formula**:
+```
+encrypted_char = (original_char - 'A' + key) % 26 + 'A'
+```
+
+**Decryption Formula**:
+```
+original_char = (encrypted_char - 'A' - key + 26) % 26 + 'A'
+```
+
+**Example** (key = 3):
+- `H` (position 7) → `K` (position 10)
+- `I` (position 8) → `L` (position 11)
+- Result: `"HI"` → `"KL"`
+
+### **Implementation Pattern**
+```c
+// Encrypt single character
+char encrypt_char(char c, int key)
+{
+    if (isalpha(c))
+    {
+        if (isupper(c))
+            return (c - 'A' + key) % 26 + 'A';
+        else
+            return (c - 'a' + key) % 26 + 'a';
+    }
+    return c;  // Non-alphabetic chars unchanged
+}
+```
+
+---
+
+## 🎨 **10. Beyond the Basics**
+
+### **ASCII Art & CLI Tools**
+Programs can create visual output:
+```bash
+cowsay "Hello CS50!"
+figlet "BIG TEXT"
+```
+
+### **Memory Efficiency Tips**
+- Use appropriate data types
+- Avoid unnecessary large arrays
+- Remember: strings need extra byte for `\0`
+
+---
+
+## 🧠 **Memory Aids & Mnemonics**
+
+### **Compilation Steps**: **"Please Come And Link"**
+- **P**reprocessing
+- **C**ompiling  
+- **A**ssembling
+- **L**inking
+
+### **ASCII Relations**:
+- **A-Z**: 65-90 (26 letters)
+- **a-z**: 97-122 (26 letters)
+- **0-9**: 48-57 (10 digits)
+- **Case difference**: Always 32
+
+### **Debugging Order**: **"Print, Step, Debug"**
+1. Printf debugging (quick)
+2. Step-through debugging (thorough)
+3. Debug50 (CS50-specific)
+
+---
+
+## ⚡ **Quick Reference Card**
+
+### **Essential Headers**
+```c
+#include <cs50.h>    // string, get_string, etc.
+#include <stdio.h>   // printf, etc.
+#include <string.h>  // strlen, etc.
+#include <ctype.h>   // isalpha, toupper, etc.
+#include <stdlib.h>  // exit, etc.
+```
+
+### **Common Patterns**
+```c
+// String length check
+if (strlen(str) == 0) { /* empty string */ }
+
+// Command-line validation
+if (argc != 2) { return 1; }
+
+// Character processing
+for (int i = 0, n = strlen(str); i < n; i++)
+{
+    if (isalpha(str[i]))
+    {
+        str[i] = toupper(str[i]);
+    }
+}
+
+// Array iteration
+for (int i = 0; i < size; i++)
+{
+    printf("%d\n", array[i]);
+}
+```
+
+---
+
+Address →   0x1000    0x1001    0x1002    0x1003
+            +-------+ +-------+ +-------+ +-------+
+Content →   |  'S'  | |  'u'  | |  'n'  | | '\0'  |
+ASCII   →   |  83   | | 117   | | 110   | |  0    |
+Hex     →   | 0x53  | | 0x75  | | 0x6E  | | 0x00  |
+            +-------+ +-------+ +-------+ +-------+
+--- 
+
+## 🎯 **Mastery Checklist**
+
+### **Conceptual Understanding** ✅
+- [ ] Explain compilation stages in detail
+- [ ] Describe array memory layout
+- [ ] Understand string = char array + '\0'
+- [ ] Know ASCII character relationships
+- [ ] Grasp command-line argument structure
+
+### **Practical Skills** ✅
+- [ ] Debug programs using multiple methods
+- [ ] Manipulate strings and arrays confidently
+- [ ] Process command-line arguments
+- [ ] Implement basic encryption algorithms
+- [ ] Handle edge cases and error conditions
+
+### **Problem-Solving** ✅
+- [ ] Break complex problems into smaller parts
+- [ ] Choose appropriate data types
+- [ ] Validate input and handle errors
+- [ ] Write clean, readable code
+- [ ] Test thoroughly with various inputs
+
+---
+
