@@ -4,10 +4,10 @@
 |-----|------------|-------------------------------------------|---------|-----------------------|----------|-------------|-------|
 | 1   | 2025-08-06 | Scratch Programming (Intro to CS)         | Lecture 0 | Scratch Project        | ✅ Done   | ✅           | 💡    |
 | 2   | 2025-08-09 | C Basics: Variables, Conditions           | Lecture 1 | Hello, Mario           | ✅ Done   | ✅           | 💡    |
-| 3   | YYYY-MM-DD | Loops, Debugging, Credit Card             | Lecture 1 | Credit                 | ✅ Done   | ✅           | 💡    |
-| 4   | YYYY-MM-DD | Arrays, Strings, Readability              | Lecture 2 | Scrabble, Readability  | ✅ Done   | ✅           | 💡    |
-| 5   | YYYY-MM-DD | Caesar & Substitution Cipher              | Lecture 2 | Caesar, Substitution   | ✅ Done   | ✅           | 💡    |
-| 6   | YYYY-MM-DD | Algorithms: Sorting, Plurality            | Lecture 3 | Plurality              | ✅ Done   | ✅           | 💡    |
+| 3   | 2025-08-10 | Loops, Debugging, Credit Card             | Lecture 1 | Credit                 | ✅ Done   | ✅           | 💡    |
+| 4   | 2025-08-11 | Arrays, Strings, Readability              | Lecture 2 | Scrabble, Readability  | ✅ Done   | ✅           | 💡    |
+| 5   | 2025-08-12 | Caesar & Substitution Cipher              | Lecture 2 | Caesar, Substitution   | ✅ Done   | ✅           | 💡    |
+| 6   | 2025-08-13 | Algorithms: Sorting, Plurality            | Lecture 3 | Plurality              | ✅ Done   | ✅           | 💡    |
 | 7   | YYYY-MM-DD | Election Systems (Runoff/Tideman)         | Lecture 3 | Runoff, Tideman        | ✅ Done   | ✅           | 💡    |
 | 8   | YYYY-MM-DD | Memory & Pointers                         | Lecture 4 | Volume, Filter         | ✅ Done   | ✅           | 💡    |
 | 9   | YYYY-MM-DD | File I/O & JPEG Recovery                  | Lecture 4 | Recover                | ✅ Done   | ✅           | 💡    |
