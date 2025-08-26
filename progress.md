@@ -9,8 +9,8 @@
 | 5   | 2025-08-12 | Caesar & Substitution Cipher              | Lecture 2 | Caesar, Substitution   | ✅ Done   | ✅           | 💡    |
 | 6   | 2025-08-13 | Algorithms: Sorting, Plurality            | Lecture 3 | Plurality              | ✅ Done   | ✅           | 💡    |
 | 7   | 2025-08-24 | Election Systems (Runoff/Tideman)         | Lecture 3 | Runoff, Tideman        | ✅ Done   | ✅           | 💡    |
-| 8   | 2025-08-15 | Memory & Pointers                         | Lecture 4 | Volume, Filter         | ✅ Done   | ✅           | 💡    |
-| 9   | YYYY-MM-DD | File I/O & JPEG Recovery                  | Lecture 4 | Recover                | ✅ Done   | ✅           | 💡    |
+| 8   | 2025-08-25 | Memory & Pointers                         | Lecture 4 | Volume, Filter         | ✅ Done   | ✅           | 💡    |
+| 9   | 2025-08-26 | File I/O & JPEG Recovery                  | Lecture 4 | Recover                | ✅ Done   | ✅           | 💡    |
 | 10  | YYYY-MM-DD | Data Structures (Lists, Hash, Tries)      | Lecture 5 | Speller - Start        | ✅ Done   | ✅           | 💡    |
 | 11  | YYYY-MM-DD | Speller Implementation & Optimization     | Lecture 5 | Speller - Complete     | ✅ Done   | ✅           | 💡    |
 | 12  | YYYY-MM-DD | Python Basics & PSet Conversion           | Lecture 6 | PSet 6 (Python)        | ✅ Done   | ✅           | 💡    |
